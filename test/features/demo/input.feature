@@ -1,9 +1,9 @@
-Feature: Web Interaction
+Feature: Web Interaction - Input
 
-    @demo
+
     Scenario Outline: Run first demo feature
         Given A Web page is opened
-        When I perform web interactions
+        When I perform value inputs
 
 
         Examples:

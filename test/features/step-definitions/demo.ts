@@ -1,9 +1,7 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-const chai = require('chai');
-const expect = chai.expect;
 
 Given(/^Google page is opened$/, async () => {
-  await browser.url('https://www.google.com/');
+  await browser.url('https://www.google.com');
   await browser.deleteCookies();
   const cookies = await browser.getCookies();
   console.log(`Cookies after deletion: ${cookies}`);
@@ -25,5 +23,5 @@ Then(/^Click the first search result$/, async () => {
 Then(/URL should match (.*)/, async expectedURL => {
   console.log(`>> expectedURL: ${expectedURL}`);
   let url = await browser.getUrl;
-  expect(url).equal(expectedURL);
+  await expect(url).toEqual(expectedURL);
 });

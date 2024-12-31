@@ -6,7 +6,7 @@ Given(/^A Web page is opened$/, async () => {
   await browser.maximizeWindow();
 });
 
-When(/^I perform web interactions$/, async () => {
+When(/^I perform value inputs$/, async () => {
   /*
    * 1. Input box
    * Actions:

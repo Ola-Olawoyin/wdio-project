@@ -22,7 +22,7 @@ await browser.keys("Enter")
 })
 
 Then(/^I click the first search result$/,async () =>{
- const ele = await $("//h3")
+ const ele = await $("h3*=WebdriverIO")
  await ele.click()
  await browser.pause(5000)
 })

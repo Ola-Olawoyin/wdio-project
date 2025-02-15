@@ -1,27 +1,33 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, Then, When } from "@wdio/cucumber-framework";
+import * as chai from "chai";
 
-Given(/^Google page is opened$/, async () => {
-  await browser.url('https://www.google.com');
-  await browser.deleteCookies();
-  const cookies = await browser.getCookies();
-  console.log(`Cookies after deletion: ${cookies}`);
-  await browser.pause(7000);
-});
 
-When(/Searched with a (.*)/, async searchedItem => {
-  console.log(`>>searchedItem: ${searchedItem}`);
-  let ele = await $(`[name=q]`);
-  await ele.setValue(searchedItem);
-  await browser.keys('Enter');
-});
 
-Then(/^Click the first search result$/, async () => {
-  let ele = await $(`<h3>`);
-  ele.click();
-});
 
-Then(/URL should match (.*)/, async expectedURL => {
-  console.log(`>> expectedURL: ${expectedURL}`);
-  let url = await browser.getUrl;
-  await expect(url).toEqual(expectedURL);
-});
+
+Given(/^I navigate to Google webpage$/ , async () => {
+    await browser.url("https://www.google.com")
+    const acceptButton = await $('button=Accept all');
+if (acceptButton.isDisplayed()) {
+    acceptButton.click();
+}
+await browser.pause(5000)
+})
+
+When(/^I Search with (.*)$/, async (SearchItem) =>{
+const ele = await $("[name='q']")
+await ele.setValue(SearchItem)
+await browser.keys("Enter")
+
+})
+
+Then(/^I click the first search result$/,async () =>{
+ const ele = await $("//h3")
+ await ele.click()
+ await browser.pause(5000)
+})
+
+ Then(/^URL should match (.*)$/,async (expectedURL) =>{
+const url = await browser.getUrl()
+chai.expect(expectedURL).to.equal(url)
+ })
